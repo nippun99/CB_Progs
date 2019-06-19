@@ -1,8 +1,12 @@
 #include<iostream>
 using namespace std;
 int main(){
-	int a[]={5,3,4,0,2,1};
-	int n=sizeof(a)/sizeof(int);
+	int n;
+	cin>>n;
+	int a[100];
+	for(int i=0;i<n;i++){
+    	cin>>a[i];
+	}
 	for(int i=0;i<=n-2;i++){
 		int min=i;
 		for(int j=i+1;j<=n-1;j++){
