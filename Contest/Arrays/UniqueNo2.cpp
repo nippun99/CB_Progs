@@ -1,4 +1,4 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 int main(){
 	int n;
@@ -12,31 +12,18 @@ int main(){
 		x=x^a[i];
 	}
 	int y=x & (~(x-1));
-	int ar0[100];
-	int ar1[100];
-	int k=0;
-	int l=0;
+	int res[2]={0};
 	for(int i=0;i<n;i++){
-		if(a[i]^y==0){
-			ar0[k]=a[i];
-			k++;
+		if(a[i]&y){
+			res[0]=res[0]^a[i];
 		}
 		else{
-			ar1[l]=a[i];
-			l++;
+			res[1]=res[1]^a[i];
 		}
 	} 
-	int res1=0;
-	int res2=0;
-	for(int i=0;i<k;i++){
-		res1=res1^ar0[i];
+	if(res[0]>res[1]){
+		swap(res[0],res[1]);
 	}
-	cout<<res1<<endl;
-	for(int i=0;i<l;i++){
-		res2=res2^ar1[i];
-	}
-	cout<<res2<<endl;
-	
-	
+	cout<<res[0]<<" "<<res[1]<<endl;
 	return 0;
 }
