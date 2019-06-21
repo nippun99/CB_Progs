@@ -12,7 +12,7 @@ int len(char *a){
 void CheckPalindrome(char* a){
 	int i=0;
 	int j=len(a)-1;
-	while(i<j){
+	while(i<=j){
 		if(a[i]!=a[j]){
 			cout<<"false"<<endl;
 			break;

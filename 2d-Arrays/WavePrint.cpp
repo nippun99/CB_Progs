@@ -7,28 +7,25 @@ int main(){
 	cin>>row>>col;
 	for(int i=0;i<row;i++){
 		for(int j=0;j<col;j++){
-				num++;
-			a[i][j]=num;
+			cin>>a[i][j];
 		}
 	}
 	
-		for(int i=0;i<col;i++){
+	for(int i=0;i<row;i++){
 			
 			
 		if(i%2==0){
-		for(int j=0;j<row;j++){
-			cout<<a[j][i]<<" ";
-		}
-		cout<<'\t';
+			for(int j=0;j<col;j++){
+				cout<<a[i][j]<<", ";
+			}
 		}
 		else{
-		for(int j=row-1;j>=0;j--){
-			cout<<a[j][i]<<" ";
-		}
-		cout<<'\t';	
+			for(int j=col-1;j>=0;j--){
+				cout<<a[i][j]<<", ";
+			}
 		}
 	}
-	
+	cout<<"END";
 	
 	
 }
