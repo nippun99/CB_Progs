@@ -10,9 +10,13 @@ int main() {
     while(n!=0){
         
         int rem=n%10;
-        if(rem>4){
+        if(rem>4 && rem<9){
             rem=9-rem;
         }
+        else if(rem==9 && n/10!=0){
+        	rem=9-rem;
+		}
+        
         newnum+=rem*pow(10,i++);
         n=n/10;
     }    
