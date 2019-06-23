@@ -4,7 +4,7 @@ using namespace std;
 bool isSafe(int board[][10],int i,int j,int n){
 	
 	//Horizontal and Vertical
-		for(int k=0;k<n;k++){
+	for(int k=0;k<n;k++){
 		if(board[i][k]||board[k][j]){
 			return false;
 		}
@@ -20,7 +20,7 @@ bool isSafe(int board[][10],int i,int j,int n){
 		r--;
 		c--;
 	}
-
+//right diagonal 
 	r=i;
 	c=j;
 

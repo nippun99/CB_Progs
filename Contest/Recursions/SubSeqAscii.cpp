@@ -16,6 +16,10 @@ void Subsequences(char *in,int i,char *out,int j){
 	// Ek baari ith ko consider krlo
 	out[j]=in[i];
 	Subsequences(in,i+1,out,j+1);
+	int as=in[i];
+	string x=to_string(as);
+	out.append(x);
+	Subsequences(in,i+1,out,j+1);
 
 }
 
