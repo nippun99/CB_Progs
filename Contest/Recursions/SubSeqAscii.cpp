@@ -1,12 +1,11 @@
 // Subsequences
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-
 void Subsequences(char *in,int i,char *out,int j){
 	// Base case
 	if(in[i]=='\0'){
 		 out[j]='\0';
-		 cout<<out<<endl;
+		 cout<<out<<" ";
 		 return;
 	}
 	// Recursive case
@@ -16,18 +15,22 @@ void Subsequences(char *in,int i,char *out,int j){
 	// Ek baari ith ko consider krlo
 	out[j]=in[i];
 	Subsequences(in,i+1,out,j+1);
-	int as=in[i];
-	string x=to_string(as);
-	out.append(x);
-	Subsequences(in,i+1,out,j+1);
+	string str=to_string((int)in[i]);
+	int k=str.length();
+	for(int l=0;l<k;l++){
+		out[j++]=str.at(l);
+	}
+	Subsequences(in,i+1,out,j);
 
 }
 
 int main(){
-	char in[]="abc";	
+	char in[100];
+	cin.getline(in,100);	
 	char out[100];
 
 	Subsequences(in,0,out,0);
+	cout<<endl<<pow(3,strlen(in));
 
 	return 0; 
 }

@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+int ct=0;
 bool isSafe(int board[][10],int i,int j,int n){
 	
 	//Horizontal and Vertical
@@ -36,15 +37,16 @@ bool isSafe(int board[][10],int i,int j,int n){
 
 bool NQueen(int board[][10],int i,int n){
 	if(i==n){
-		//print board
 		for(int k=0;k<n;k++){
 			for(int l=0;l<n;l++){
-				cout<<board[k][l];
+				if(board[k][l]==1){
+					cout<<"{"<<k+1<<"-"<<l+1<<"} ";
+				}
 			}
-			cout<<endl;
 		}
-		cout<<endl;
-		return true;
+		ct++;
+		cout<<" ";
+		return false;
 	}
 	for(int j=0;j<n;j++){
 		if(isSafe(board,i,j,n)){
@@ -64,6 +66,6 @@ int main(){
 	cin>>n;
 
 	NQueen(board,0,n);
-
+	cout<<endl<<ct;
 	return 0;
 }
