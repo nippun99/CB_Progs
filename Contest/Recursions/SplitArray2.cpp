@@ -2,37 +2,24 @@
 using namespace std;
 int suminc=0;
 int sumexc=0;
-bool split(int *a,int *inc, int *exc,int i,int j,int k,int n,int suminc,int sumexc){
+void split(int *a,int *inc, int *exc,int i,int j,int k,int n){
 	//base
 	if(i==n){
-		if(sumexc==suminc){
-			for(int l=0;l<j;l++){
-				cout<<inc[l]<<" ";
-			}
-			cout<<"and ";
-			for(int l=0;l<k;l++){
-				cout<<exc[l]<<" ";
-			}
-			cout<<endl;
+		for(int l=0;l<j;l++){
+					
 		}
-		return false;
+		for(int l=0;l<k;l++){
+			cout<<exc[l]<<" ";
+		}
+		cout<<endl;
 	}
 	
 	//recursive
 	exc[k++]=a[i];
-	bool res=split(a,inc,exc,i+1,j,k,n,suminc,sumexc+a[i]);
-	if(res)
-		return res;
+	split(a,inc,exc,i+1,j,k,n);
 	inc[j++]=a[i];
-	res=split(a,inc,exc,i+1,j,k,n,suminc+a[i],sumexc);
+	split(a,inc,exc,i+1,j,k,n);
 	
-	if(res==false){
-		if(inc[0]){
-			j--;
-		}
-	}
-	
-	return res;
 	
 	
 	
