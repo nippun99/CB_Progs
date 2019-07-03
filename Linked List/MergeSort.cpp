@@ -1,0 +1,123 @@
+#include<bits/stdc++.h>
+using namespace std;
+class node{
+	public:
+		int data;
+		node* next;
+		
+		node(int d):data(d),next(NULL){}
+};
+int length(node *head){
+	int count=0;
+	while(head){
+		count++;
+		head=head->next;
+	}
+	return count;
+}
+
+node *mid(node* head){
+	if(head==NULL){
+		return NULL;
+	}
+	
+	node* slow=head;
+	node* fast=head->next;
+	
+	while(fast!=NULL && fast->next!=NULL){
+		fast=fast->next->next;
+		slow =slow->next;
+	}
+	return slow;
+}
+
+
+void  InsertAtFront(node* &head,int data){
+	node *n=new node(data);
+	n->next=head;
+	head=n;
+}
+
+void print(node *head){
+	while(head){
+		cout<<head->data<<"-->";
+		head=head->next;
+		
+	}
+	cout<<"NULL"<<endl;
+}
+
+node* merge(node* a,node* b){
+	//base
+	if(a==NULL){
+		return b;
+	}
+	if(b==NULL){
+		return a;
+	}
+	//Recursive Case
+	node* c;
+	if(a->data<b->data){
+		c=a;
+		c->next=merge(a->next,b);
+	}
+	else{
+		c=b;
+		c->next=merge(a,b->next);
+	}
+	return c;
+}
+
+node* MergeSort(node* head){
+	// Base case
+	if(head->next == NULL || head == NULL){
+		return head;
+	}
+	// Recursive case
+	// 1. Divide
+	node* m = mid(head);
+	node* a = head;
+	node* b = m->next;
+	m->next = NULL;
+	// 2. Sort
+	a = MergeSort(a);
+	b = MergeSort(b);
+	// 3. Merge
+	node* newHead = merge(a,b);
+	return newHead;
+}
+
+
+int main() {
+	node* head = NULL;
+	node* head1 = NULL;
+	InsertAtFront(head,18);
+	InsertAtFront(head,100);
+	InsertAtFront(head,10);
+	InsertAtFront(head,20);
+	InsertAtFront(head,6);
+	InsertAtFront(head,0);
+	InsertAtFront(head,5);
+	InsertAtFront(head,2);
+	InsertAtFront(head,1);
+
+	print(head);
+
+	// InsertAtFront(head1,10);
+	// InsertAtFront(head1,9);
+	// InsertAtFront(head1,7);
+	// InsertAtFront(head1,5);
+	// InsertAtFront(head1,3);
+
+	// Print(head1);
+	// head = merge(head,head1);
+	// head = MergeSort(head);
+	MergeSort(head);
+	print(head);
+
+
+
+	
+	return 0;
+}
+

@@ -2,23 +2,44 @@
 using namespace std;
 int suminc=0;
 int sumexc=0;
+int coun=0;
 void split(int *a,int *inc, int *exc,int i,int j,int k,int n){
 	//base
-	if(i==n){
-		for(int l=0;l<j;l++){
-					
+	if(n==0){
+		int suminc=0;
+		int sumexc=0;
+		inc[j]=0;
+		exc[k]=0;
+		int k1,k2;	
+		for(k1=0;inc[k1]!=0;k1++){
+			suminc+=inc[k1];		
 		}
-		for(int l=0;l<k;l++){
-			cout<<exc[l]<<" ";
+		for(k2=0;exc[k2]!=0;k2++){
+			sumexc+=exc[k2];	
 		}
-		cout<<endl;
+		if(sumexc==suminc){
+			for(int l=0;l<k1;l++){
+				cout<<" "<<inc[l];		
+			}
+			cout<<" and";
+			for(int l=0;l<k2;l++){
+				cout<<" "<<exc[l];
+			}
+			cout<<endl;
+			coun++;
+		}
+	return;	
 	}
+
+	
 	
 	//recursive
-	exc[k++]=a[i];
-	split(a,inc,exc,i+1,j,k,n);
-	inc[j++]=a[i];
-	split(a,inc,exc,i+1,j,k,n);
+	exc[k]=a[i];
+	inc[j]=a[i];
+	split(a,inc,exc,i+1,j+1,k,n-1);
+	exc[k]=a[i];
+	inc[j]=a[i];
+	split(a,inc,exc,i+1,j,k+1,n-1);
 	
 	
 	
@@ -34,7 +55,8 @@ int main() {
 		cin>>a[i];
 	}
 	
-	split(a,inc,exc,0,0,0,n,0,0);
+	split(a,inc,exc,0,0,0,n);
+	cout<<coun;
 	return 0;
 }
 
