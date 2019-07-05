@@ -32,7 +32,7 @@ void BreakCycle(node* head){
 	node* fast=head;
 	node* slow=head;
 	while(fast){
-		fast=fast-next->next;
+		fast=fast->next->next;
 		slow=slow->next;
 		if(fast==slow){
 			break;
