@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
+#include<bits/stdc++.h>
+using namespace std;
 class node{
 	public:
 		int data;
@@ -93,65 +95,61 @@ node* BuildTree(){
 	return root;
 }
 
-bool isBST(node* root,int min=INT_MIN,int max=INT_MAX){
-	//Base Case
-	if(root==NULL){
-		return true;
-	}
-	//Recursive Case
-	if(root->data<=max && root->data>=min && isBST(root->left,min,root->data) && isBST(root->right,root->data,max)){
-		return true;
-	}
-	return false;
-}
-
-class Pair{
+class LinkedList{
 	public:
-		int height;
-		bool balanced;
+		node* head;
+		node* tail;
 };
 
-
-Pair isBalanced(node* root){
-	//Base Case
-	Pair p;
-	if(root==NULL){
-		p.height=0;
-		p.balanced=true;
-		return p;
+LinkedList BstToLL(node* root){
+	LinkedList l;
+	// Base case
+	if(root == NULL){
+		l.head=l.tail=NULL;
+		return l;
 	}
-	Pair left= isBalanced(root->left);
-	Pair right= isBalanced(root->right);
-	
-	
-	p.height=max(left.height,right.height)+1;
-	if(left.balanced && right.balanced && abs(left.height-right.height)<=1){
-		p.balanced=true;
+	// Recursive case
+	if(root->left!=NULL && root->right==NULL){
+		LinkedList left = BstToLL(root->left);
+		left.tail->right = root;
+		l.head =left.head;
+		l.tail =root;
+		return l;
+	}
+	else if(root->left == NULL && root->right!=NULL){
+		LinkedList right = BstToLL(root->right);
+		root->right = right.head;
+		l.head = root;
+		l.tail = right.tail;
+		return l;
+	}
+	else if(root->left==NULL && root->right == NULL){
+		l.head = l.tail = root;
+		return l;
 	}
 	else{
-		p.balanced=false;
+		LinkedList left = BstToLL(root->left);
+		LinkedList right = BstToLL(root->right);
+		left.tail->right = root;
+		root->right = right.head;
+		l.head = left.head;
+		l.tail = right.tail;
+		return l;
 	}
-	return p;
 }
 
-node* ArrayToBST(int *arr,int s,int e){
-	if(s>e){
-		return NULL;
+void Print(node* head){
+	while(head){
+		cout<<head->data<<"-->";
+		head=head->right;
 	}
-	//Recursive Case
-	int mid=(s+e)/2;
-	node* root=new node(arr[mid]);
-	root->left=ArrayToBST(arr,s,mid-1);
-	root->right=ArrayToBST(arr,mid+1,e);
-return root;
+	cout<<endl;
 }
+
 
 int main() {
 	// 8 3 10 1 6 14 4 7 13 -1
-//	node* root=BuildTree();
-int arr[]={1,3,5,6,7,8,9,10};
-int n=sizeof(arr)/sizeof(int);
-node* root=ArrayToBST(arr,0,n-1);
+	node* root=BuildTree();
 //	PreOrder(root);
 //	cout<<endl;
 //	LevelOrderPrint(root);
@@ -162,17 +160,21 @@ node* root=ArrayToBST(arr,0,n-1);
 //	else{
 //		cout<<"NOT BST";
 //	}
+	
 	LevelOrderPrint( root);
+	LinkedList l = BstToLL(root);
+	Print(l.head);
 
 
-	Pair p;
-	p=isBalanced(root);
-	if(p.balanced){
-		cout<<"Balanced";
-	}
-	else{
-		cout<<"Unbalanced";
-	}
+
+//	Pair p;
+//	p=isBalanced(root);
+//	if(p.balanced){
+//		cout<<"Balanced";
+//	}
+//	else{
+//		cout<<"Unbalanced";
+//	}
 	return 0;
 }
 
