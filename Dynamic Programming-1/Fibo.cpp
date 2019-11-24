@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int Fibo(int n,int* dp){
+int topdown(int n,int* dp){
 	if(n==0||n==1){
 		dp[n]=n;
 		return n;
@@ -9,7 +9,7 @@ int Fibo(int n,int* dp){
 		return dp[n];
 	}
 	
-	int ans=Fibo(n-1,dp) + Fibo(n-2,dp);
+	int ans=topdown(n-1,dp) + topdown(n-2,dp);
 	dp[n]=ans;
 	return dp[n];
 }
@@ -23,20 +23,15 @@ int BottomUp(int n){
 	}
 	int ans=dp[n];
 	delete []dp;
-	return dp[n];
-	
+	return dp[n];	
 }
 
 int main() {
-	int n;
-	cin>>n;
 	int dp[10000];
 	for(int i=0;i<10000;i++){
 		dp[i]=-1;
 	}
-//	cout<<Fibo(n,dp)<<endl;
-	
-	cout<<BottomUp(n);
+	cout<<BottomUp(5);
 	return 0;
 }
 
